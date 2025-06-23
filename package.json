@@ -1,5 +1,24 @@
 {
-  "name": "holiday-gift-list",
+  "name": "merkle-tree-gift-list",
+  "version": "1.0.0",
+  "description": "A Merkle tree-based gift list example built as part of Alchemy University’s Ethereum Developer Bootcamp",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "server": "node server/index.js",
+    "client": "node client/index.js",
+    "example": "node utils/example.js"
+  },
+  "keywords": [
+    "merkle-tree",
+    "blockchain",
+    "ethereum",
+    "proof",
+    "gift-list",
+    "bootcamp"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.2.0",
     "ethereum-cryptography": "^1.1.2",

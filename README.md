@@ -1,26 +1,77 @@
-# Gift List
+# 🎁 Merkle Tree Gift List
 
-To get started with the repository, clone it and then run `npm install` in the top-level directory to install the depedencies.
+This project was built as part of the **Ethereum Developer Bootcamp at Alchemy University**.  
+It’s a fun and hands-on example that demonstrates **Merkle Trees** and their application to verifying data efficiently — here simulating a "Nice List" for holiday gift eligibility.
 
-There are three folders in this repository:
+---
 
-## Client
+## 🎯 What is this project about?
+We have a **list of names** (`niceList.json`). To check if someone is on the list, we:
+- Build a Merkle tree and generate a proof on the client.
+- Send the proof and the name to the server.
+- The server verifies the proof against a precomputed `MERKLE_ROOT`.
+- If verified, the server responds with a "gift".
 
-You can run the client from the top-level directory with `node client/index`. This file is a script which will send an HTTP request to the server.
+This mimics a real-world trustless verification process often seen in blockchain apps.
 
-Think of the client as the _prover_ here. It needs to prove to the server that some `name` is in the `MERKLE_ROOT` on the server. 
+---
 
-## Server
+## 🧠 What I learned
+✅ Implementing a Merkle tree structure manually in JavaScript.  
+✅ Generating Merkle proofs and verifying them using `keccak256`.  
+✅ How client–server communication can leverage cryptographic proofs to avoid sharing entire datasets.  
+✅ Practicing HTTP requests with `axios` and setting up an `Express` server as a verifier.
 
-You can run the server from the top-level directory with `node server/index`. This file is an express server which will be hosted on port 1225 and respond to the client's request.
+---
 
-Think of the server as the _verifier_ here. It needs to verify that the `name` passed by the client is in the `MERKLE_ROOT`. If it is, then we can send the gift! 
+## 📂 Project structure
 
-## Utils
+- **/client**  
+  - `index.js`: Generates a Merkle proof for a given `name` and POSTs it to the server.
+  
+- **/server**  
+  - `index.js`: Sets up an Express API. It receives the proof, checks it against the Merkle `MERKLE_ROOT`, and responds.
 
-There are a few files in utils:
+- **/utils**  
+  - `MerkleTree.js`: Constructs a Merkle tree and provides methods to generate roots and proofs.
+  - `verifyProof.js`: Given a proof, a leaf (`name`), and a Merkle `root`, it returns `true` or `false`.
+  - `niceList.json`: The list of names that qualify for a gift.
+  - `example.js`: Example usage of generating and verifying a proof offline.
 
-- The `niceList.json` which contains all the names of the people who deserve a gift this year (this is randomly generated, feel free to add yourself and others to this list!)
-- The `example.js` script shows how we can generate a root, generate a proof and verify that some value is in the root using the proof. Try it out from the top-level folder with `node/example.js`
-- The `MerkleTree.js` should look familiar from the Merkle Tree module! This one has been modified so you should not have to deal with any crypto type conversion. You can import this in your client/server
-- The `verifyProof.js` should also look familiar. This was the last stage in the module. You can use this function to prove a name is in the merkle root, as show in the example.
+---
+
+## 🚀 Getting started
+
+### 1️⃣ Clone the repo:
+```bash
+git clone https://github.com/Hayk-1315/Merkle-Tree-Gift-list.git
+cd merkle-tree-gift-list
+2️⃣ Install dependencies:
+npm install
+
+3️⃣ Run the server:
+node server/index.js
+The server will listen on http://localhost:1225
+
+4️⃣ Run the client:
+node client/index.js
+The client will generate a proof for the hardcoded name, send it to the server, and log the server’s response.
+
+🧪 Test the MerkleTree utilities directly:
+You can also run the example proof verification locally:
+node utils/example.js
+
+🔧 Tech Stack
+🛠 Backend: Node.js, Express
+
+🔐 Cryptography: keccak256 (from ethereum-cryptography)
+
+🧠 Merkle trees & proofs
+
+🔄 HTTP client: axios
+
+📜 Notes
+Feel free to add your own name to niceList.json to test the proof generation and verification process. This project is intended as a learning exercise, but it also illustrates a pattern often used in blockchain apps where verifying a small proof is much more efficient than sharing entire datasets.
+
+🎉 Thanks for checking it out!
+If you liked this repo, don’t hesitate to give it a ⭐ on GitHub.
